@@ -1,13 +1,15 @@
-const io = require('socket.io')
+const { PORT } = process.env;
+const io = require('socket.io')(PORT || 9000);
 
 const documentChannel = ({ socketId }) => (data) => {
-	const dataJSON = JSON.parse(data);
-});
+  const { type, action } = JSON.parse(data);
+  console.log({ type });
+};
 
-const cncChannel = ({ socketId })) => (data) => {
-	const dataJSON = JSON.parse(data);
-});
-
+const cncChannel = ({ socketId }) => (data) => {
+  const { type, action } = JSON.parse(data);
+  
+};
 
 io.on('connection', (socket) => {
 	const socketId = socket.id;
@@ -16,8 +18,8 @@ io.on('connection', (socket) => {
 	socket.on('document', documentChannel({ socketId }));
 
 	// attach cnc channel
-	socket.on('cdc', cncChannel({ socketId }));
-}
+  socket.on('cdc', cncChannel({ socketId }));
+});
 
 io.on('disconnect', (socket) => {
 	socket.broadcast.emit('disconnect', {
@@ -25,5 +27,4 @@ io.on('disconnect', (socket) => {
 	});
 });
 
-
-export.default = io;
+module.exports = io;

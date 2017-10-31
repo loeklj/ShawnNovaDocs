@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "export PORT=9000 && node server.js",
+    "start": "export PORT=9000 && node socket.js",
     "ngrok": "ngrok start -config=./ngrok.yml --all"
   },
   "repository": {
