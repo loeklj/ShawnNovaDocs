@@ -1,5 +1,4 @@
-const { PORT } = process.env;
-const io = require('socket.io');
+const io = require('socket.io')(9000);
 
 const documentChannel = ({ socketId }) => (data) => {
   const { type, action } = JSON.parse(data);
@@ -25,5 +24,3 @@ io.on('disconnect', (socket) => {
 		data: 'You have disconnected!'
 	});
 });
-
-module.exports = io;
