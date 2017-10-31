@@ -1,10 +1,11 @@
 const io = require('socket.io')(9000);
 const handlers = require('./core/handlers/document');
 
-const documentChannel = ({ socketId }) => async (data) => {
+const documentChannel = ({ socketId, socket }) => async (data) => {
   const { type, action } = JSON.parse(data);
   if (typeof handlers[type] === 'function') {
-    await handlers[type](action);
+    const result = await handlers[type](action);
+    if (result) socket.emit(action.id, result);
   }
 };
 
@@ -16,10 +17,10 @@ io.on('connection', (socket) => {
 	const socketId = socket.id;
 
 	// attach document channel
-	socket.on('document', documentChannel({ socketId }));
+	socket.on('document', documentChannel({ socketId, socket }));
 
 	// attach cnc channel
-  socket.on('cdc', cncChannel({ socketId }));
+  socket.on('cdc', cncChannel({ socketId, socket }));
 });
 
 io.on('disconnect', (socket) => {
