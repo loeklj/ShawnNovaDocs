@@ -1,0 +1,6 @@
+authtoken: 5z6yimzUcrSxQz2yh5AMv_6oaiNcuAdErA1KQFkSQEw
+tunnels:
+  webhook:
+    addr: 3004
+    proto: http
+    host_header: localhost
