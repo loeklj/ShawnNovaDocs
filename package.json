@@ -1,0 +1,23 @@
+{
+  "name": "shawnnovadocs",
+  "version": "0.1.0",
+  "description": "NovaDocs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "export PORT=9000 && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loeklj/ShawnNovaDocs.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/loeklj/ShawnNovaDocs/issues"
+  },
+  "homepage": "https://github.com/loeklj/ShawnNovaDocs#readme",
+  "dependencies": {
+    "socket.io": "^2.0.4"
+  }
+}
