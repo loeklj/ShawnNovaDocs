@@ -1,9 +1,12 @@
 const { PORT } = process.env;
 const io = require('socket.io');
+const handlers = require('./core/handlers/document');
 
-const documentChannel = ({ socketId }) => (data) => {
+const documentChannel = ({ socketId }) => async (data) => {
   const { type, action } = JSON.parse(data);
-  console.log({ type });
+  if (typeof handlers[type] === 'function') {
+    await handlers[type](action);
+  }
 };
 
 const cncChannel = ({ socketId }) => (data) => {

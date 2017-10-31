@@ -14,8 +14,8 @@ class Database {
     return path.resolve(this.directory, id);
   }
 
-  async createDocument(id) {
-    return writeFile(this._getDocumentPath(id), this.defaultDocument);
+  async createDocument(id, document) {
+    return writeFile(this._getDocumentPath(id), document || this.defaultDocument);
   }
 
   async readDocument(id) {
