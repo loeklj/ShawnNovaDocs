@@ -1,2 +1,5 @@
+const io = require('socket.io');
 const { PORT } = process.env;
-const io = require('socket.io')(PORT || 9000);
+
+// listen on 9000 for socket
+io.listen(PORT || 9000);
