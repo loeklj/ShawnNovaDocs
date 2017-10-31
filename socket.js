@@ -1,8 +1,11 @@
 const io = require('socket.io')(9000);
+const handlers = require('./core/handlers/document');
 
-const documentChannel = ({ socketId }) => (data) => {
+const documentChannel = ({ socketId }) => async (data) => {
   const { type, action } = JSON.parse(data);
-  console.log({ type });
+  if (typeof handlers[type] === 'function') {
+    await handlers[type](action);
+  }
 };
 
 const cncChannel = ({ socketId }) => (data) => {
@@ -24,3 +27,5 @@ io.on('disconnect', (socket) => {
 		data: 'You have disconnected!'
 	});
 });
+
+console.log(`Socket listening on 9000`);
