@@ -1,13 +1,17 @@
 const http = require('http')
 const path = require('path');
+const fs = require('fs');
 
 const STATIC_BASE = path.join(__dirname, './public');
 
 const requestHandler = (request, response) => {
-	const fileLoc = path.resolve(STATIC_BASE, request.url);
+  let url = request.url;
+  if (url === '/') url = 'index.html';
+  const fileLoc = path.resolve(STATIC_BASE, url);
+  console.log({ fileLoc })
+  const stream = fs.createReadStream(fileLoc);
 	response.statusCode = 200;
-	response.write(fileLoc);
-	return response.end();
+  stream.pipe(response);
 }
 
 const server = http.createServer(requestHandler);
