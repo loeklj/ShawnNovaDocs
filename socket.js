@@ -1,5 +1,5 @@
 const { PORT } = process.env;
-const io = require('socket.io')(PORT || 9000);
+const io = require('socket.io');
 
 const documentChannel = ({ socketId }) => (data) => {
   const { type, action } = JSON.parse(data);
@@ -8,7 +8,6 @@ const documentChannel = ({ socketId }) => (data) => {
 
 const cncChannel = ({ socketId }) => (data) => {
   const { type, action } = JSON.parse(data);
-  
 };
 
 io.on('connection', (socket) => {
