@@ -15,7 +15,8 @@ class Database {
   }
 
   async createDocument(id, document) {
-    return writeFile(this._getDocumentPath(id), document || this.defaultDocument);
+    console.log("Path", this._getDocumentPath(id));
+    return await writeFile(this._getDocumentPath(id), document || this.defaultDocument);
   }
 
   async readDocument(id) {
