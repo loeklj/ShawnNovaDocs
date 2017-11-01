@@ -7,5 +7,8 @@ module.exports = {
   },
   read: async ({ id }) => {
     return await db.readDocument(id, doc);
+  },
+  update: async ({ id, doc }) => {
+    return await db.updateDocument(id, doc);
   }
 };

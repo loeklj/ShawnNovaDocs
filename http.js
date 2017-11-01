@@ -7,8 +7,8 @@ const STATIC_BASE = path.join(__dirname, './public');
 const requestHandler = (request, response) => {
   let url = request.url;
   if (url === '/') url = 'index.html';
-  const fileLoc = path.resolve(STATIC_BASE, url);
-  console.log({ fileLoc })
+  const fileLoc = path.resolve(STATIC_BASE, path.normalize(url));
+  console.log({ fileLoc, url })
   const stream = fs.createReadStream(fileLoc);
 	response.statusCode = 200;
   stream.pipe(response);
