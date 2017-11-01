@@ -8,6 +8,11 @@ const requestHandler = (request, response) => {
   let url = request.url;
   if (url === '/') url = 'index.html';
   const fileLoc = path.resolve(STATIC_BASE, path.normalize(url));
+  if (!fs.existsSync(fileLoc)) {
+    response.writeHead(404, { 'Content-Type': 'text/plan' });
+    return response.end("Not Found");
+  }
+
   console.log({ fileLoc, url })
   const stream = fs.createReadStream(fileLoc);
 	response.statusCode = 200;
